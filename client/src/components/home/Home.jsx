@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Game from "../game-card/GameCard";
+import GameCard from "../game-card/GameCard";
 
 export default function Home() {
 
@@ -34,7 +34,7 @@ export default function Home() {
                 <div className="home-container">
                     
                     {lastestGames.length === 0 && <p className="no-articles">No games yet</p>}
-                    {lastestGames.map(game => <Game key={game._id} {...game} />)}
+                    {lastestGames.map(game => <GameCard key={game._id} {...game} />)}
                   
                 </div>
             </div>

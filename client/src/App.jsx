@@ -4,6 +4,7 @@ import Header from "./components/header/Header"
 import Home from "./components/home/Home"
 import Catalog from "./components/catalog/Catalog"
 import Details from "./components/details/Details"
+import GameCreate from "./components/game-create/GameCreate"
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element = {<Home />} />
         <Route path="/games" element = {<Catalog />} />
         <Route path="/games/:gameId/details" element = {<Details />} />
+        <Route path="/games/create" element = {<GameCreate />} />
       </Routes>
       
       <Footer /> 
