@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Game from "../game/Game";
+import Game from "../game-card/GameCard";
 
 const baseUrl = 'http://localhost:3030/jsonstore/games';
 export default function Catalog() {
