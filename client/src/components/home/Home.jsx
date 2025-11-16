@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import GameCard from "../game-card/GameCard";
+import request from "../../utils/request";
 
 export default function Home() {
 
     const[lastestGames, setLastestGames] = useState([]);  
 
     useEffect(() => {
-        fetch('http://localhost:3030/jsonstore/games')
-            .then(response => response.json())
+        request('http://localhost:3030/jsonstore/games')
+        // fetch('http://localhost:3030/jsonstore/games')
+        //     .then(response => response.json())
             .then(result => {
                 // Process and display the latest games
                 const resultGames = Object.values(result)
