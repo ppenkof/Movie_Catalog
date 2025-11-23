@@ -1,4 +1,23 @@
+import { useState } from "react";
+
 export default function Edit(){
+    const initialValues = {
+        title: '',
+        genre: '',
+        players: '',
+        date: '',
+        imageUrl: '',
+        summary: ''
+    }
+    const [values, setValues] = useState(initialValues);
+
+    const changeHandler = (e)=>{
+        setValues(state => ({
+            ...state,
+            [e.target.name]: e.target.value
+        }));
+    }
+
     return (
         // <!-- add Page ( Only htmlFor logged-in users ) -->
         <section id="edit-page">
@@ -9,33 +28,73 @@ export default function Edit(){
 
                     <div className="form-group-half">
                         <label htmlFor="gameName">Game Name:</label>
-                        <input type="text" id="gameName" name="gameName" placeholder="Enter game title..."/>
+                        <input 
+                            type="text" 
+                            id="gameName" 
+                            name="title" 
+                            placeholder="Enter game title..."
+                            value={values.title}
+                            onChange={changeHandler}
+                        />
                     </div>
 
                     <div className="form-group-half">
                         <label htmlFor="genre">Genre:</label>
-                        <input type="text" id="genre" name="genre" placeholder="Enter game genre..."/>
+                        <input 
+                            type="text" 
+                            id="genre" 
+                            name="genre" 
+                            placeholder="Enter game genre..."
+                            value={values.genre}
+                            onChange={changeHandler}
+                        />
                     </div>
 
                     <div className="form-group-half">
                         <label htmlFor="activePlayers">Active Players:</label>
-                        <input type="number" id="activePlayers" name="activePlayers" min="0" placeholder="0"/>
+                        <input 
+                            type="number" 
+                            id="activePlayers" 
+                            name="players" min="0" 
+                            placeholder="0"
+                            value={values.players}
+                            onChange={changeHandler}
+                        />
                     </div>
 
                     <div className="form-group-half">
                         <label htmlFor="releaseDate">Release Date:</label>
-                        <input type="date" id="releaseDate" name="releaseDate"/>
+                        <input 
+                            type="date" 
+                            id="releaseDate" 
+                            name="date"
+                            value={values.date}
+                            onChange={changeHandler}
+                        />
                     </div>
 
                     <div className="form-group-full">
                         <label htmlFor="imageUrl">Image URL:</label>
-                        <input type="text" id="imageUrl" name="imageUrl" placeholder="Enter image URL..."/>
+                        <input 
+                            type="text" 
+                            id="imageUrl" 
+                            name="imageUrl" 
+                            placeholder="Enter image URL..."
+                            value={values.imageUrl}
+                            onChange={changeHandler}
+                        />
                     </div>
 
                     <div className="form-group-full">
                         <label htmlFor="summary">Summary:</label>
-                        <textarea name="summary" id="summary" rows="5"
-                            placeholder="Write a brief summary..."></textarea>
+                        <textarea 
+                            name="summary" 
+                            id="summary" 
+                            rows="5"
+                            placeholder="Write a brief summary..."
+                            value={values.summary}
+                            onChange={changeHandler}>
+                        </textarea>
                     </div>
 
                     <input className="btn submit" type="submit" value="EDIT GAME"/>
