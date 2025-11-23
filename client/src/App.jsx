@@ -7,13 +7,16 @@ import Details from "./components/details/Details"
 import GameCreate from "./components/game-create/GameCreate"
 import Register from "./components/register/Register"
 import { useState } from "react"
+import Login from "./components/login/Login"
 
 
 function App() {
   const [user, setUser] = useState(null);
 
-  const registerHandler = (email)=>{
-    setUser({email});
+  const authHandler = (email)=>{
+    setUser({
+      email
+    });
   }
   
   return (
@@ -25,7 +28,8 @@ function App() {
         <Route path="/games" element = {<Catalog />} />
         <Route path="/games/:gameId/details" element = {<Details />} />
         <Route path="/games/create" element = {<GameCreate />} />
-        <Route path="/register" element = {<Register user={user} onRegister={registerHandler}/>} />
+        <Route path="/register" element = {<Register user={user} onRegister={authHandler}/>} />
+        <Route path="/login" element = {<Login onLogin={authHandler}/>} />
       </Routes>
       
       <Footer /> 

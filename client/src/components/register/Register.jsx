@@ -1,10 +1,11 @@
+import { useNavigate } from "react-router";
 
 
 export default function Register({
-    user,
+    
     onRegister
 }){
-    //const [user, setUser] = useState(null);
+    const navigate = useNavigate();
     const registerSubmit = (formData) => {
 
         const email = formData.get('email');
@@ -24,6 +25,8 @@ export default function Register({
         //Register user
         onRegister(email);
 
+        navigate('/');
+
     }
 
     return (
@@ -32,7 +35,7 @@ export default function Register({
                 <div className="container">
                     <div className="brand-logo"></div>
                     <h1>Register</h1>
-    {user && <p>Registered as: {user.email}</p>}
+
                     <label htmlFor="email">Email:</label>
                     <input type="email" id="email" name="email" placeholder="Your Email"/>
     
