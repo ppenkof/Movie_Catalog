@@ -2,7 +2,7 @@ export default function Footer() {
     return (
         <>
             <footer>
-                <p class="center-text">React Course Exercise @ SoftUni &trade;</p>
+                <p className="center-text">React Course Exercise @ SoftUni &trade;</p>
             </footer>
         </>
     );

@@ -1,8 +1,38 @@
-export default function Login(){
+import { useNavigate } from "react-router";
+
+export default function Login({
+    onLogin,
+}){
+    const navigate = useNavigate();
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+
+        const email = formData.get('email');
+        const password = formData.get('password');
+
+        //Validation
+
+        if(!email || !password){
+            return alert('All fields are required!');
+        };
+
+        try {
+            //Login user
+            onLogin(email, password);
+            navigate('/'); 
+            
+        } catch (error) {
+            alert(error.message);
+        }
+        
+    };
 
     return (
-        <section id="login-page">
-            <form id="login">
+        <section id="login-page"> 
+             {/* controlled form submission */}
+            <form id="login" onSubmit={submitHandler}> 
                 <div className="container">
                     <h1>Login</h1>
                     <label htmlFor="email">Email</label>
