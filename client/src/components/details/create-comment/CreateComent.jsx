@@ -11,12 +11,13 @@ export default function CreateComent({
         setComment(e.target.value);
     };
 
-    const submitHandler = async () => {
+    const submitHandler = async () => { console.log(user.email, comment, gameId);
         await request('/comments', 'POST', {
             author: user.email,
             message: comment,
             gameId
         });
+       
     }
 
     return (

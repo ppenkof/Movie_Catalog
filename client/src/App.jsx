@@ -21,14 +21,12 @@ function App() {
       throw new Error('User with this email already exists');
     }
 
-    const newUser = {email, password};
-
-    setRegisteredUsers(state => [...state, newUser]);
+    setRegisteredUsers(state => [...state, {email, password}]);
 
     //automatically log in the user after registration
-    setUser({
-      newUser
-    });
+    setUser(
+      {email, password},
+    );
   }
 
   const loginHandler = (email, password)=>{
