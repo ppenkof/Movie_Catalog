@@ -11,7 +11,8 @@ export default function Details({
     const {gameId} = useParams();
     const[game, setGame] = useState({});
     const navigate = useNavigate();
-
+    const [refresh, setRefresh] = useState(false);
+    
     useEffect(() => {
         // fetch(`http://localhost:3030/jsonstore/games/${gameId}`)
         //     .then(response => response.json())
@@ -43,6 +44,9 @@ export default function Details({
         }    
     }
 
+    const refreshHandler = () => {
+        setRefresh(state => !state);
+    }
 
     return (
         <section id="game-details">
@@ -84,12 +88,12 @@ export default function Details({
                 <button className="button" onClick={deleteGameHandler}>Delete</button>
             </div>
             
-            <DetailsComments/>
+            <DetailsComments refresh={refresh}/>
     
         </div>
      {/* <!-- Add Comment ( Only for logged-in users, which is not creators of the current game ) --> */}
         
-        {user && <CreateComent user={user}/>}
+        {user && <CreateComent user={user} onCreate={refreshHandler}/>}
 
     </section>
     );

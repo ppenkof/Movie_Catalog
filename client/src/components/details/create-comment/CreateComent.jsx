@@ -3,7 +3,8 @@ import request from "../../../utils/request";
 import { useParams } from "react-router";
 
 export default function CreateComent({
-    user
+    user,
+    onCreate
 }) {   
     const {gameId} = useParams();
     const [comment, setComment] = useState('');
@@ -12,13 +13,22 @@ export default function CreateComent({
     };
 
     const submitHandler = async () => { console.log(user.email, comment, gameId);
-        await request('/comments', 'POST', {
+        try {
+            await request('/comments', 'POST', {
             author: user.email,
             message: comment,
             gameId
         });
-       
+
+        setComment('');
+        onCreate();
+
+        } catch (error) {
+            alert(error.message);
+        }
+      
     }
+
 
     return (
         <article className="create-comment">
