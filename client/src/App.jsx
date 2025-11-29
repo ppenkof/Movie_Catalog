@@ -13,28 +13,44 @@ import Edit from "./components/edit/Edit"
 
 
 function App() {
-  const [registeredUsers, setRegisteredUsers] = useState([]);
+   // After second exerise way with formData without real state management
+  // const [registeredUsers, setRegisteredUsers] = useState([]);
   const [user, setUser] = useState(null);
 
-  const registerHandler = (email, password)=>{
-    if(registeredUsers.some(user => user.email === email)){
-      throw new Error('User with this email already exists');
-    }
+  const registerHandler = async (email, password)=>{
+     // After second exerise way with formData without real state management
+    // if(registeredUsers.some(user => user.email === email)){
+    //   throw new Error('User with this email already exists');
+    // }
 
-    setRegisteredUsers(state => [...state, {email, password}]);
+    // setRegisteredUsers(state => [...state, {email, password}]);
 
     //automatically log in the user after registration
+    const newUser = {email, password};
+
+    const response = await fetch('http://localhost:3030/users/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newUser)
+    });
+
+    const result = await response.json();
+
     setUser(
       {email, password},
     );
   }
 
   const loginHandler = (email, password)=>{
-    const user = registeredUsers.find(user => user.email === email && user.password === password);
+     // After second exerise way with formData without real state management
+    // const user = registeredUsers.find(user => user.email === email && user.password === password);
 
-    if(!user){
-      throw new Error('Invalid email or password');
-    }
+    // if(!user){
+    //   throw new Error('Invalid email or password');
+    // }
+
 
    setUser({
       user

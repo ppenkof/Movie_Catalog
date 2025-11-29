@@ -31,7 +31,7 @@ export default function Register({ onRegister }) {
 
   // }
 
-  const registerHandler = (values) => {
+  const registerHandler = async (values) => {
     const { email, password, confirmPassword: confirmPassword } = values;
     //Validation
 
@@ -45,7 +45,7 @@ export default function Register({ onRegister }) {
 
     try {
       //Register user
-      onRegister(email, password);
+      await onRegister(email, password);
       navigate("/");
     } catch (error) {
       alert(error.message);
