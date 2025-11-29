@@ -10,6 +10,7 @@ import { useState } from "react"
 import Login from "./components/login/Login"
 import Logout from "./components/logout/Logout"
 import Edit from "./components/edit/Edit"
+import UserContext from "./contexts/UserContext"
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
     });
 
     const result = await response.json();
+    console.log(result);
 
     setUser(
       {email, password},
@@ -51,7 +53,6 @@ function App() {
     //   throw new Error('Invalid email or password');
     // }
 
-
    setUser({
       user
     });
@@ -60,25 +61,32 @@ function App() {
   const logoutHandler = ()=>{
     setUser(null);
   };
+
+  const userContextValue = {
+    user,
+    isAuthenticated: !!user?.accessToken,
+    registerHandler,
+    loginHandler,
+    logoutHandler
+  };
   
   return (
-    <>
+    <UserContext.Provider value = {userContextValue}>
       <Header user={user} />
-
       <Routes>
         <Route path="/" element = {<Home />} />
         <Route path="/games" element = {<Catalog />} />
         <Route path="/games/:gameId/details" element = {<Details user={user}/>} />
         <Route path="/games/create" element = {<GameCreate />} />
         <Route path="/games/:gameId/edit" element = {<Edit />} />
-        <Route path="/register" element = {<Register onRegister={registerHandler}/>} />
+        <Route path="/register" element = {<Register />} />
         <Route path="/login" element = {<Login onLogin={loginHandler}/>} />
         <Route path="/logout" element = {<Logout onLogout={logoutHandler}/>} />
       </Routes>
       
       <Footer /> 
 
-    </>
+    </UserContext.Provider>
   )
 }
 

@@ -1,8 +1,11 @@
 import { useNavigate } from "react-router";
 import useForm from "../../hooks/useForm";
+import { useContext } from "react";
+import UserContext from "../../contexts/UserContext";
 
-export default function Register({ onRegister }) {
-  const navigate = useNavigate();
+export default function Register() {
+    const navigate = useNavigate();
+    const {registerHandler} = useContext(UserContext); 
 
   // After second exerise way with formData without real state management
   // const registerSubmit = (formData) => {
@@ -31,7 +34,7 @@ export default function Register({ onRegister }) {
 
   // }
 
-  const registerHandler = async (values) => {
+  const registerSubmitHandler = async (values) => {
     const { email, password, confirmPassword: confirmPassword } = values;
     //Validation
 
@@ -45,7 +48,7 @@ export default function Register({ onRegister }) {
 
     try {
       //Register user
-      await onRegister(email, password);
+      await registerHandler(email, password);
       navigate("/");
     } catch (error) {
       alert(error.message);
@@ -55,7 +58,7 @@ export default function Register({ onRegister }) {
   const { 
     register,
     formAction, 
-} = useForm(registerHandler, {
+} = useForm(registerSubmitHandler, {
     email: "",
     password: "",
     confirmPassword: "",
